@@ -1,6 +1,6 @@
 // pages/api/updateButtonClicks.js
 
-let totalButtonPresses = 0;
+var totalButtonPresses = 0;
 export async function POST(request: Request) {
   totalButtonPresses++;
   return Response.json(
