@@ -5,28 +5,29 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [buttonPressed, setButtonPressed] = useState(-1);
   const handleButtonClick = async () => {
-    try {
-      const response = await axios.post("/api/updateButtonClicks", {});
-      if (response.data && response.data.totalButtonPresses) {
-        setButtonPressed(response.data.totalButtonPresses);
-      }
-    } catch (error) {
-      console.error("Error updating button clicks:", error);
-    }
+    setButtonPressed(buttonPressed + 1);
+    // try {
+    //   const response = await axios.post("/api/updateButtonClicks", {});
+    //   if (response.data && response.data.totalButtonPresses) {
+    //     setButtonPressed(response.data.totalButtonPresses);
+    //   }
+    // } catch (error) {
+    //   console.error("Error updating button clicks:", error);
+    // }
   };
-  useEffect(() => {
-    const getButtonPresses = async () => {
-      try {
-        const response = await axios.get("/api/updateButtonClicks");
-        if (response.data && response.data.totalButtonPresses) {
-          setButtonPressed(response.data.totalButtonPresses);
-        }
-      } catch (error) {
-        console.error("Error updating button clicks:", error);
-      }
-    };
-    getButtonPresses();
-  });
+  // useEffect(() => {
+  //   const getButtonPresses = async () => {
+  //     try {
+  //       const response = await axios.get("/api/updateButtonClicks");
+  //       if (response.data && response.data.totalButtonPresses) {
+  //         setButtonPressed(response.data.totalButtonPresses);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error updating button clicks:", error);
+  //     }
+  //   };
+  //   getButtonPresses();
+  // });
   return (
     <div className="flex justify-center items-center h-screen">
       <div>
