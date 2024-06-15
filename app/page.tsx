@@ -26,7 +26,10 @@ export default function Home() {
             onClick={handleButtonClick}
           />
         </div>
-        <div>Button has been pressed {buttonPressed} times</div>
+
+        <div className={`${buttonPressed === 0 ? "hidden" : ""}`}>
+          Button has been pressed {buttonPressed} times
+        </div>
       </div>
     </div>
   );
