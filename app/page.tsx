@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [buttonPressed, setButtonPressed] = useState(0);
+  const [buttonPressed, setButtonPressed] = useState(-1);
   const handleButtonClick = async () => {
     try {
       const response = await axios.post("/api/updateButtonClicks", {});
@@ -15,8 +15,18 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    handleButtonClick();
-  }, []);
+    const getButtonPresses = async () => {
+      try {
+        const response = await axios.get("/api/updateButtonClicks");
+        if (response.data && response.data.totalButtonPresses) {
+          setButtonPressed(response.data.totalButtonPresses);
+        }
+      } catch (error) {
+        console.error("Error updating button clicks:", error);
+      }
+    };
+    getButtonPresses();
+  });
   return (
     <div className="flex justify-center items-center h-screen">
       <div>
@@ -27,7 +37,7 @@ export default function Home() {
           />
         </div>
 
-        <div className={`${buttonPressed === 0 ? "hidden" : ""}`}>
+        <div className={`${buttonPressed === -1 ? "hidden" : ""}`}>
           Button has been pressed {buttonPressed} times
         </div>
       </div>
